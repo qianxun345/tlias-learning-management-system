@@ -1,4 +1,9 @@
 package com.loedean.service;
 
+import com.loedean.pojo.Dept;
+
+import java.util.List;
+
 public interface DeptService {
+    List<Dept> findAll();
 }
