@@ -22,4 +22,10 @@ public interface DeptMapper {
     // #{}中写的是对象的属性名，不是表的字段名
     @Insert("insert into dept(name, create_time, update_time) values (#{name}, #{createTime}, #{updateTime})")
     void save(Dept dept);
+
+    @Select("select id, name, create_time, update_time from dept where id = #{id}")
+    Dept getById(Integer id);
+
+    @Update("update dept set name = #{name}, update_time = #{updateTime} where id = #{id}")
+    void update(Dept dept);
 }

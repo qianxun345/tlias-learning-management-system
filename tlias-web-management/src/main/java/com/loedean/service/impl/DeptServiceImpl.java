@@ -31,4 +31,15 @@ public class DeptServiceImpl implements DeptService {
         dept.setUpdateTime(LocalDateTime.now());
         deptMapper.save(dept);
     }
+
+    @Override
+    public Dept getById(Integer id) {
+        return deptMapper.getById(id);
+    }
+
+    @Override
+    public void update(Dept dept) {
+        dept.setUpdateTime(LocalDateTime.now());
+        deptMapper.update(dept);
+    }
 }

@@ -22,6 +22,13 @@ public class DeptController {
         return Result.success(deptList);
     }
 
+    @GetMapping("/depts/{id}")
+    public Result get(@PathVariable("id") Integer id){
+        System.out.println("查询部门id:" + id);
+        Dept dept = deptService.getById(id);
+        return Result.success(dept);
+    }
+
     // 方法一：HttpServletRequest方式
 //    @DeleteMapping("/depts")
 //    public Result delete(HttpServletRequest request){
@@ -50,7 +57,13 @@ public class DeptController {
     public Result add(@RequestBody Dept dept){
         System.out.println("添加部门:" + dept);
         deptService.save(dept);
+        return Result.success();
+    }
 
+    @PutMapping("/depts")
+    public Result update(@RequestBody Dept dept){
+        System.out.println("修改部门:" + dept);
+        deptService.update(dept);
         return Result.success();
     }
 }
