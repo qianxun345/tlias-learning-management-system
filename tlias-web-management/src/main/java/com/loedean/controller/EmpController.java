@@ -1,6 +1,7 @@
 package com.loedean.controller;
 
 import com.loedean.pojo.Emp;
+import com.loedean.pojo.EmpQueryParam;
 import com.loedean.pojo.PageResult;
 import com.loedean.pojo.Result;
 import com.loedean.service.EmpService;
@@ -18,11 +19,18 @@ public class EmpController {
 
     @Autowired
     private EmpService empService;
+//    @GetMapping
+//    public Result info(@RequestParam(defaultValue = "1") Integer page,
+//                       @RequestParam(defaultValue = "10") Integer pageSize){
+//        log.info("查询员工，page={}，pageSize={}", page, pageSize);
+//        PageResult<Emp> pageResult = empService.page(page, pageSize);
+//        return Result.success(pageResult);
+//    }
+
     @GetMapping
-    public Result info(@RequestParam(defaultValue = "1") Integer page,
-                       @RequestParam(defaultValue = "10") Integer pageSize){
-        log.info("查询员工，page={}，pageSize={}", page, pageSize);
-        PageResult<Emp> pageResult = empService.page(page, pageSize);
+    public Result page(EmpQueryParam  empQueryParam){
+        log.info("查询员工，{}", empQueryParam);
+        PageResult<Emp> pageResult = empService.page(empQueryParam);
         return Result.success(pageResult);
     }
 }
