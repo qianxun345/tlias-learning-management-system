@@ -2,14 +2,18 @@ package com.loedean.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.loedean.mapper.EmpExprMapper;
 import com.loedean.mapper.EmpMapper;
 import com.loedean.pojo.Emp;
+import com.loedean.pojo.EmpExpr;
 import com.loedean.pojo.EmpQueryParam;
 import com.loedean.pojo.PageResult;
 import com.loedean.service.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,6 +21,9 @@ public class EmpServiceImpl implements EmpService {
 
     @Autowired
     private EmpMapper empMapper;
+
+    @Autowired
+    private EmpExprMapper EmpExprMapper;
 //    @Override
 //    public PageResult<Emp> page(Integer page, Integer pageSize) {
 //        Long total = empMapper.count();
@@ -53,5 +60,23 @@ public class EmpServiceImpl implements EmpService {
             List<Emp> empList = empMapper.list(empQueryParam);
             return new PageResult<>(p.getTotal(), p.getResult());
         }
+    }
+
+    @Override
+    public void save(Emp emp) {
+        emp.setCreateTime(LocalDateTime.now());
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.insert(emp);
+
+        Integer empid = emp.getId();
+        List<EmpExpr> exprList = emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)){
+            for (EmpExpr empExpr : exprList) {
+                empExpr.setEmpId(empid);
+            }
+            EmpExprMapper.insertBatch(exprList);
+        }
+        else System.out.println("exprlist是空的");
+
     }
 }
