@@ -26,4 +26,5 @@ public interface EmpMapper {
 
     Emp getById(Integer id);
 
+    void updateById(Emp emp);
 }

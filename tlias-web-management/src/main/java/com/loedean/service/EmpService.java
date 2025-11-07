@@ -14,6 +14,8 @@ public interface EmpService {
     void deleteByIds(List<Integer> ids);
 
     Emp getInfo(Integer id);
+
+    void update(Emp emp);
 //    PageResult<Emp> page(Integer page, Integer pageSize);
 
 }
