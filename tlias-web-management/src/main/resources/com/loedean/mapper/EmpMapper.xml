@@ -63,7 +63,7 @@
         </collection>
     </resultMap>
 
-    <select id="getById" resultType="com.loedean.pojo.Emp">
+    <select id="getById" resultMap="empResultMap">
         select e.*,
                ee.id ee_id,
                ee.emp_id ee_empid,
