@@ -87,4 +87,15 @@ public class EmpServiceImpl implements EmpService {
         }
 
     }
+
+    @Override
+    public void deleteByIds(List<Integer> ids) {
+        empMapper.deleteByIds(ids);
+        EmpExprMapper.deleteByEmpIds(ids);
+    }
+
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getById(id);
+    }
 }
