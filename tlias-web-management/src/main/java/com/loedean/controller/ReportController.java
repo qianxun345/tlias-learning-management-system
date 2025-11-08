@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @RequestMapping("/report")
 @RestController
@@ -21,6 +24,13 @@ public class ReportController {
     public Result getEmpJobData(){
         log.info("统计各职位人数");
         JobOption jobOption = jobOptionService.getEmpJobData();
+        return Result.success(jobOption);
+    }
+
+    @GetMapping("/empGenderData")
+    public Result getRenderData(){
+        log.info("统计员工性别");
+        List<Map<String, Object>> jobOption = jobOptionService.getEmpGenderData();
         return Result.success(jobOption);
     }
 }

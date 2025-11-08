@@ -2,10 +2,7 @@ package com.loedean.mapper;
 
 import com.loedean.pojo.Emp;
 import com.loedean.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -29,5 +26,9 @@ public interface EmpMapper {
 
     void updateById(Emp emp);
 
+    @MapKey("pos")
     List<Map<String, Object>> countEmpJobData();
+
+    @MapKey("name")
+    List<Map<String, Object>> countEmpGenderData();
 }
