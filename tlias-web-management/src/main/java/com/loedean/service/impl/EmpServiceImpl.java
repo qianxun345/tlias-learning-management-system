@@ -120,4 +120,14 @@ public class EmpServiceImpl implements EmpService {
             EmpExprMapper.insertBatch(exprList);
         }
     }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+
+        Emp loginEmp = empMapper.getByUsernameAndPassword(emp);
+        if(loginEmp != null){
+            return new LoginInfo(loginEmp.getId(), loginEmp.getUsername(), loginEmp.getName(), "");
+        }
+        return null;
+    }
 }
